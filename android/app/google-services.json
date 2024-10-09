@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198678565645",
+    "project_id": "toktik-e4e97",
+    "storage_bucket": "toktik-e4e97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198678565645:android:72c4bd7c7244f94ef39644",
+        "android_client_info": {
+          "package_name": "com.example.toktik"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdVA5PCOwBu-lafpdz95NEmHZ_xQvQBtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
