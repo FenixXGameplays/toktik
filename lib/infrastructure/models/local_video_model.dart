@@ -3,8 +3,8 @@ import 'package:toktik/domain/entities/video_post.dart';
 class LocalVideoModel {
   final String caption;
   final String videoUrl;
-  final int likes;
-  final int views;
+   int likes;
+   int views;
 
   LocalVideoModel(
       {

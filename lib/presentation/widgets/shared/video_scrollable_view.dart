@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 import 'package:toktik/presentation/widgets/shared/video_player/video_buttons.dart';
 import 'package:toktik/presentation/widgets/video/full_screen_player.dart';
 
+import '../../../infrastructure/models/local_video_model.dart';
+import '../../providers/discover_provider.dart';
+
 class VideoScrollableView extends StatelessWidget {
   final List<VideoPost> videos;
-  const VideoScrollableView({super.key, required this.videos});
+  final List<String> videosId;
+  const VideoScrollableView({super.key,
+    required this.videos,
+    required this.videosId});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +21,8 @@ class VideoScrollableView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         final video = videos[index];
+        final videoId = videosId[index];
+        incrementView( video, videoId, context, index);
         return Stack(
           children: [
             SizedBox.expand(
@@ -27,8 +36,9 @@ class VideoScrollableView extends StatelessWidget {
               bottom: 40,
               right: 20,
               child: VideoButtons(
-                likes: video.likes,
-                views: video.view,
+                video: video,
+                index: index,
+                id: videoId
               ),
             )
           ],
@@ -36,5 +46,11 @@ class VideoScrollableView extends StatelessWidget {
       },
       itemCount: videos.length,
     );
+  }
+
+  void incrementView(VideoPost video, String videoId, BuildContext context, int index) async{
+    final discProvider = context.watch<DiscoverProvider>();
+    discProvider.videos[index].view++;
+    discProvider.updateVideoView(videoId, video.toJson());
   }
 }

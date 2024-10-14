@@ -1,15 +1,22 @@
 class VideoPost {
   final String caption;
   final String videoUrl;
-  final int likes;
-  final int view;
+   int likes;
+   int view;
 
 VideoPost(
    {
     required this.caption,
     required this.videoUrl,
-    this.likes = 0,
-     this.view = 0,
+    required this.likes,
+     required this.view,
 });
+
+  Map<String, dynamic> toJson() => {
+    "caption": caption,
+    "videoUrl": videoUrl,
+    "views": view,
+    "likes": likes,
+  };
 
 }

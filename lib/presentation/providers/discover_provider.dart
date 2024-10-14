@@ -9,7 +9,9 @@ import 'package:toktik/shared/data/local_video_post.dart';
 class DiscoverProvider extends ChangeNotifier{
 
   List<VideoPost> videos = [];
+  List<String> videosId = [];
   bool initialLoading = true;
+
 
 
   Future<void> getVideos() async{
@@ -19,15 +21,26 @@ class DiscoverProvider extends ChangeNotifier{
 
         for (var docSnapshot in querySnapshot.docs) {
           videos.add(LocalVideoModel.fromJsonMap(docSnapshot.data()).toVideoPostEntity());
+          videosId.add(docSnapshot.id);
         }
 
       },
       onError: (e) => print("Error completing: $e"),
     );
 
-
-
     initialLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> updateVideoView(String id, Map<String, dynamic> newData) async{
+    var db = FirebaseFirestore.instance;
+    await db.collection("videos").doc(id).update(newData);
+
+  }
+
+  Future<void> updateVideoLike(String id, Map<String, dynamic> newData) async{
+    var db = FirebaseFirestore.instance;
+    await db.collection("videos").doc(id).update(newData);
     notifyListeners();
   }
 }

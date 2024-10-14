@@ -16,7 +16,7 @@ class DiscoverScreen extends StatelessWidget {
       ? const Center(
         child: CircularProgressIndicator.adaptive(),
       )
-      : VideoScrollableView(videos: discProvider.videos)
+      : VideoScrollableView(videos: discProvider.videos, videosId: discProvider.videosId,)
     );
   }
 }
